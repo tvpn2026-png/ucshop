@@ -1,138 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PUBG UC Price List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Background Design */
+        :root {
+            --pubg-gold: #f39c12;
+            --pubg-orange: #d35400;
+            --bg-dark: #0a0c10;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --uc-blue: #00d2ff;
+        }
+
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #050505 100%);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 30px 15px;
+            color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            color: white;
-            padding: 20px 0;
         }
 
-        /* Container for 3D effect */
-        .container {
-            width: 90%;
-            max-width: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            text-align: center;
+        /* Logo Animation */
+        .logo-container {
+            position: relative;
+            margin-bottom: 20px;
         }
 
-        /* Logo Style */
         .logo-img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #f39c12;
-            box-shadow: 0 0 20px rgba(243, 156, 18, 0.5), inset 0 0 10px rgba(0,0,0,0.5);
-            margin-bottom: 15px;
+            border: 3px solid var(--pubg-gold);
+            box-shadow: 0 0 25px rgba(243, 156, 18, 0.4);
             transition: transform 0.5s ease;
         }
 
         .logo-img:hover {
-            transform: rotateY(180deg);
+            transform: scale(1.05) rotate(5deg);
         }
 
         h1 {
-            color: #f39c12;
+            color: var(--pubg-gold);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            text-shadow: 2px 4px 10px rgba(243, 156, 18, 0.3);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+            border-bottom: 2px solid rgba(243, 156, 18, 0.2);
+            padding-bottom: 10px;
+            width: 100%;
+            max-width: 400px;
         }
 
-        /* 3D Card Style for Price Items */
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Pro Card Style */
         .price-card {
-            background: linear-gradient(145deg, #232946, #121629);
-            margin: 12px 0;
-            padding: 15px;
-            border-radius: 15px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 20px 10px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
-            border-bottom: 4px solid #f39c12;
-            box-shadow: 8px 8px 15px rgba(0,0,0,0.4);
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--pubg-gold), var(--pubg-orange));
         }
 
         .price-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.2);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--pubg-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .uc-amount {
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 700;
             color: #ffffff;
+            margin-bottom: 10px;
+            display: block;
         }
 
         .price-amount {
             font-size: 1.2rem;
-            font-weight: bold;
-            color: #00d2ff;
-            text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+            font-weight: 800;
+            color: var(--uc-blue);
+            background: rgba(0, 210, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 10px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
         }
 
-        /* 3D Buy Button Style */
+        /* Buy Button Section */
+        .action-area {
+            margin-top: 40px;
+            text-align: center;
+            width: 100%;
+        }
+
         .buy-btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 15px 40px;
-            background: linear-gradient(145deg, #f39c12, #d35400);
+            padding: 15px 50px;
+            background: linear-gradient(135deg, var(--pubg-gold) 0%, var(--pubg-orange) 100%);
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
             border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(211, 84, 0, 0.4), 
-                        inset 0 -5px 5px rgba(0,0,0,0.2), 
-                        inset 0 5px 5px rgba(255,255,255,0.3);
+            box-shadow: 0 8px 20px rgba(211, 84, 0, 0.4);
             transition: all 0.3s ease;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .buy-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(211, 84, 0, 0.6);
-            background: linear-gradient(145deg, #ffb33b, #e67e22);
-        }
-
-        .buy-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 5px 10px rgba(211, 84, 0, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(243, 156, 18, 0.5);
+            filter: brightness(1.1);
         }
 
         .footer-text {
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 0.9rem;
-            color: #ffffff;
-            opacity: 0.8;
-            font-weight: 500;
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        /* Responsive Fix */
+        @media (max-width: 400px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            h1 { font-size: 1.2rem; }
+            .uc-amount { font-size: 0.95rem; }
+            .price-amount { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="logo-container">
         <img src="https://raw.githubusercontent.com/tvpn2026-png/ucshop/refs/heads/main/20260414_155459.png" alt="Logo" class="logo-img">
-        
-        <h1>PUBG UC စျေးနှုန်း</h1>
+    </div>
+    
+    <h1>PUBG UC စျေးနှုန်းများ</h1>
 
+    <div class="grid-container">
         <div class="price-card">
             <span class="uc-amount">💵 60 UC</span>
             <span class="price-amount">36 B</span>
@@ -162,10 +204,11 @@
             <span class="uc-amount">💵 8100 UC</span>
             <span class="price-amount">3300 B</span>
         </div>
+    </div>
 
-        <p class="footer-text">Uc များကို စျေးသက်သာစွာ ဝယ်ယူနိင်ပါပြီ</p>
-
-        <a href="https://m.me/TunnTunnWinnn" target="_blank" class="buy-btn">UC ဝယ်ယူရန်</a>
+    <div class="action-area">
+        <p class="footer-text">UC များကို စျေးသက်သာစွာ ဝယ်ယူနိုင်ပါပြီ</p>
+        <a href="https://m.me/TunnTunnWinnn" target="_blank" class="buy-btn">🛒 UC ဝယ်ယူရန်</a>
     </div>
 
 </body>
